@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TarifFragment">
+
+    <EditText
+        android:id="@+id/editTextYemekMalzeme"
+        android:layout_width="318dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Yemek Malzemelerini Giriniz..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextYemekIsmi" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="258dp"
+        android:layout_height="233dp"
+        android:layout_marginTop="40dp"
+        android:onClick="gorselEkle"
+        android:src="@drawable/add_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextYemekIsmi"
+        android:layout_width="318dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Yemek İsmini Giriniz..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/buttonKaydet"
+        android:layout_width="182dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="50dp"
+        android:onClick="kaydet"
+        android:src="@drawable/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
