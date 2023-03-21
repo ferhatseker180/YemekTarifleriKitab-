@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Bundle
@@ -44,7 +45,56 @@ class TarifFragment : Fragment() {
             gorselEkle(it)
         }
 
+        arguments?.let {
+            var gelenBilgi = TarifFragmentArgs.fromBundle(it).bilgi
+
+            if (gelenBilgi.equals("menudengeldim")) {
+                // Yeni yemek eklemek için gelindi.
+                editTextYemekIsmi.setText("")
+                editTextYemekMalzeme.setText("")
+                buttonKaydet.visibility= View.VISIBLE
+
+                val gorselSecmeArkaPlani = BitmapFactory.decodeResource(context?.resources,R.drawable.add_photo)
+                imageView.setImageBitmap(gorselSecmeArkaPlani)
+
+            } else {
+        // Oluşturulmuş yemeğe bakılmak için gelindi.
+                buttonKaydet.visibility = View.INVISIBLE
+
+                val secilenId = TarifFragmentArgs.fromBundle(it).id
+
+                context?.let {
+
+                    try {
+
+                        val db = it.openOrCreateDatabase("Yemekler",Context.MODE_PRIVATE,null)
+                        val cursor = db.rawQuery("SELECT * FROM yemekler WHERE id = ?", arrayOf(secilenId.toString()))
+
+                        val yemekIsmiIndex = cursor.getColumnIndex("yemekismi")
+                        val yemekMalzemeIndex = cursor.getColumnIndex("yemekmalzemesi")
+                        val yemekGorseli = cursor.getColumnIndex("gorsel")
+
+                        while (cursor.moveToNext()) {
+                            editTextYemekIsmi.setText(cursor.getString(yemekIsmiIndex))
+                            editTextYemekMalzeme.setText(cursor.getString(yemekMalzemeIndex))
+
+                            val byteDizisi = cursor.getBlob(yemekGorseli)
+                            val bitmap = BitmapFactory.decodeByteArray(byteDizisi,0,byteDizisi.size)
+                            imageView.setImageBitmap(bitmap)
+                        }
+
+                        cursor.close()
+                    }catch (e : Exception) {
+                        e.printStackTrace()
+
+                    }
+                }
+
+            }
+        }
     }
+
+
 
     fun kaydet(view: View) {
 // SQlite'a veri kaydetme

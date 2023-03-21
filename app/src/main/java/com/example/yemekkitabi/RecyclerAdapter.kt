@@ -3,6 +3,7 @@ package com.example.yemekkitabi
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_row.view.*
 
@@ -23,6 +24,12 @@ class RecyclerAdapter(val yemekListesi : ArrayList<String>, val idListesi : Arra
 
         holder.itemView.recyler_row_text.text = yemekListesi[position]
 
+        holder.itemView.setOnClickListener {
+
+            val action = ListeFragmentDirections.actionListeFragmentToTarifFragment("recyclerdangeldim",idListesi[position])
+            Navigation.findNavController(it).navigate(action)
+
+        }
     }
 
     override fun getItemCount(): Int {

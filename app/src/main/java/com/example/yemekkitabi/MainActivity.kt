@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_ekle) {
-            val action = ListeFragmentDirections.actionListeFragmentToTarifFragment()
+            val action = ListeFragmentDirections.actionListeFragmentToTarifFragment("menudengeldim",0)
             Navigation.findNavController(this,R.id.fragment).navigate(action)
         }
         return super.onOptionsItemSelected(item)
